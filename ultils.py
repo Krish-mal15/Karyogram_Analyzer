@@ -113,6 +113,7 @@ def findContours(img, imgPre, minArea=1000, maxArea=float('inf'), sort=True,
     contours, hierarchy = cv2.findContours(imgPre, retrType, approxType)
 
     i = 0
+    number = 0
     for cnt in contours:
 
         area = cv2.contourArea(cnt)
@@ -126,17 +127,19 @@ def findContours(img, imgPre, minArea=1000, maxArea=float('inf'), sort=True,
                     x, y, w, h = cv2.boundingRect(approx)
                 cx, cy = x + (w // 2), y + (h // 2)
                 i += 1
-                #cv2.rectangle(imgContours, (x, y), (x + w, y + h), c, 2)
-                #cv2.circle(imgContours, (x + (w // 2), y + (h // 2)), 5, c, cv2.FILLED)
-                #conFound.append({"cnt": cnt, "area": area, "bbox": [x, y, w, h], "center": [cx, cy]})
-                print(cnt[0][0][0], cnt[0][0][1])
-                if (cnt[0][0][0] >= 450 and cnt[0][0][1] >= 272):
+                # cv2.rectangle(imgContours, (x, y), (x + w, y + h), c, 2)
+                # cv2.circle(imgContours, (x + (w // 2), y + (h // 2)), 5, c, cv2.FILLED)
+                conFound.append({"cnt": cnt, "area": area, "bbox": [x, y, w, h], "center": [cx, cy]})
+                # print(cnt[0][0][0], cnt[0][0][1])
+                if (cnt[0][0][0] >= 450 and cnt[0][0][1] >= 250):
                     cv2.rectangle(imgContours, (x, y), (x + w, y + h), (0, 255, 0), 2)
+                    number += 1
+                    print("Number of Sex Chromosomes: ", number)
+
                 cv2.putText(imgContours, str(y), (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, ct, 2)
 
             if sort:
                 conFound = sorted(conFound, key=lambda x: x["area"], reverse=False)
-
 
     return imgContours, conFound
 

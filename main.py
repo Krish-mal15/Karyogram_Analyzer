@@ -4,12 +4,11 @@ from cvzone.ColorModule import ColorFinder
 import numpy
 import math
 
-#img = cv2.imread("testData/k2-female-DS.jpeg")
-#img = cv2.imread("testData/k3-male.png")
+img = cv2.imread("testData/k2-female-DS.jpeg")
 #img = cv2.imread("testData/k1-male-cancer.png")
 #img = cv2.imread("testData/k5-male.png")
 #img = cv2.imread("testData/k6-female-turner.png")
-img = cv2.imread("testData/k7-female.png")
+#img = cv2.imread("testData/k7-female.png")
 #img = cv2.imread("testData/k8-male-klinefelter.png")
 
 # 660 x 430
@@ -22,7 +21,7 @@ while True:
 
     imgColor, mask = colorFinder.update(img, hsvVals)
 
-    imgContours, contours = cvzone.findContours(img, mask, minArea=100)
+    imgContours, contours, number = cvzone.findContours(img, mask, minArea=100)
 
     #print(len(contours))
 
